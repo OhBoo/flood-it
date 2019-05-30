@@ -29,7 +29,7 @@ public class Gameboard extends GraphicsComponent {
     public static final Color BLUE = new Color(30, 116, 255);
     public static final int NUM_OF_COLORS = 5;
     
-    private int movesTaken = 0;
+    private static int movesTaken = 0;
 
 	public Gameboard() {
 		
@@ -95,7 +95,11 @@ public class Gameboard extends GraphicsComponent {
 			square.set(color);
 		}
 		expandUpperLeftGroup();
-		movesTaken++;
+		movesTaken();
+	}
+	
+	static int movesTaken() {
+		return movesTaken++;
 	}
 
 	/**
@@ -261,20 +265,19 @@ public class Gameboard extends GraphicsComponent {
 		System.out.println("Y for yellow");
 		System.out.println("G for green");
 		System.out.println("B for blue");
+		
 		while (!gameboard.finished()) {
 			gc.setVisible(true);
 			System.out.println("Enter color (R, O, Y, G, or B):");
-			String s = input.next();
 			
-			Color color = RED;
-			if (s.equals("O")) color = ORANGE;
-			else if (s.equals("Y")) color = YELLOW;
-			else if (s.equals("G")) color = GREEN;
-			else if (s.equals("B")) color = BLUE;
-			gameboard.changeUpperLeftGroupToColor(color);
-			gc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.add(gc);
-			System.out.println(movesTaken);
+			gameboard.changeUpperLeftGroupToColor(RED);
+			if (input.next().equals("O")) gameboard.changeUpperLeftGroupToColor(ORANGE);
+			else if (input.next().equals("Y")) gameboard.changeUpperLeftGroupToColor(YELLOW);
+			else if (input.next().equals("G")) gameboard.changeUpperLeftGroupToColor(GREEN);
+			else if (input.next().equals("B")) gameboard.changeUpperLeftGroupToColor(BLUE);
+			
+			gameboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			System.out.println(Gameboard.movesTaken());
 		}
 		input.close();
 	}
