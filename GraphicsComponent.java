@@ -86,13 +86,14 @@ public class GraphicsComponent extends JFrame {
 			System.out.println("Enter color (R, O, Y, G, or B):");
 			String s = input.next();
 			
-			Color color = Gameboard.RED;
-			if (s.equals("O")) color = Gameboard.ORANGE;
-			else if (s.equals("Y")) color = Gameboard.YELLOW;
-			else if (s.equals("G")) color = Gameboard.GREEN;
-			else if (s.equals("B")) color = Gameboard.BLUE;
-			gameboard.changeUpperLeftGroupToColor(color);
+			gameboard.changeUpperLeftGroupToColor(Gameboard.RED);
+			if (s.equals("O")) gameboard.changeUpperLeftGroupToColor(Gameboard.ORANGE);
+			else if (s.equals("Y")) gameboard.changeUpperLeftGroupToColor(Gameboard.YELLOW);
+			else if (s.equals("G")) gameboard.changeUpperLeftGroupToColor(Gameboard.GREEN);
+			else if (s.equals("B")) gameboard.changeUpperLeftGroupToColor(Gameboard.BLUE);
+			
 			gameboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			System.out.println(Gameboard.movesTaken());
 		}
 		input.close();
 	}
